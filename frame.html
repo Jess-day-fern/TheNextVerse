@@ -1,1 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>In the Frame | The Next Verse</title>
+
+  <meta
+    name="description"
+    content="A visual autobiography of Jess Day told through photographs of home, athletics, military service, friendship, love, and family."
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* =====================================================
+       IN THE FRAME
+       Page-specific styles
+    ====================================================== */
+
+    .frame-hero {
+      position: relative;
+      min-height: 82vh;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      background: var(--deep-ink);
+    }
+
+    .frame-hero-image {
+      position: absolute;
+      inset: 0;
+      background-image: url("images/Photo-3-letterman-jacket.jpg");
+      background-size: cover;
+      background-position: center 44%;
+      transform: scale(1.02);
+    }
+
+    .frame-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          0deg,
+          rgba(7, 11, 14, 0.94) 0%,
+          rgba(7, 11, 14, 0.52) 40%,
+          rgba(7, 11, 14, 0.16) 75%
+        ),
+        linear-gradient(
+          90deg,
+          rgba(7, 11, 14, 0.58) 0%,
+          transparent 70%
+        );
+    }
+
+    .frame-hero-content {
+      position: relative;
+      z-index: 2;
+      width: min(1400px, 90%);
+      margin: 0 auto;
+      padding: 170px 0 80px;
+    }
+
+    .frame-hero h1 {
+      max-width: 900px;
+      margin: 0;
+      color: var(--warm-white);
+      font-size: clamp(5rem, 12vw, 12rem);
+      line-height: 0.75;
+      letter-spacing: -0.06em;
+    }
+
+    .frame-hero h1 span {
+      display: block;
+      margin-left: 0.2em;
+      font-style: italic;
+    }
+
+    .frame-hero-intro {
+      max-width: 620px;
+      margin: 45px 0 0 8px;
+      color: rgba(242, 239, 231, 0.76);
+      font-family: var(--serif);
+      font-size: clamp(1.35rem, 2.2vw, 2rem);
+      font-style: italic;
+      line-height: 1.3;
+    }
+
+    .photo-chapter {
+      padding: 130px 6vw;
+    }
+
+    .chapter-heading {
+      display: grid;
+      width: min(1400px, 100%);
+      margin: 0 auto 70px;
+      grid-template-columns: 0.65fr 1.35fr;
+      gap: 70px;
+      align-items: end;
+    }
+
+    .chapter-heading h2 {
+      margin-bottom: 0;
+    }
+
+    .chapter-heading-copy {
+      max-width: 570px;
+      justify-self: end;
+    }
+
+    .chapter-heading-copy p:last-child {
+      margin-bottom: 0;
+    }
+
+    .memory-grid {
+      display: grid;
+      width: min(1450px, 100%);
+      margin: 0 auto;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 22px;
+    }
+
+    .memory-card {
+      position: relative;
+      margin: 0;
+    }
+
+    .memory-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .memory-card figcaption {
+      margin-top: 14px;
+    }
+
+    .memory-title {
+      display: block;
+      color: var(--warm-white);
+      font-family: var(--serif);
+      font-size: 1.45rem;
+      line-height: 1.1;
+    }
+
+    .memory-caption {
+      display: block;
+      margin-top: 5px;
+      color: rgba(242, 239, 231, 0.5);
+      font-size: 0.66rem;
+      letter-spacing: 0.08em;
+      line-height: 1.5;
+      text-transform: uppercase;
+    }
+
+    .section-fog .memory-title {
+      color: var(--ink);
+    }
+
+    .section-fog .memory-caption {
+      color: rgba(10, 15, 19, 0.52);
+    }
+
+    .memory-wide {
+      grid-column: span 7;
+    }
+
+    .memory-tall {
+      grid-column: span 5;
+    }
+
+    .memory-half {
+      grid-column: span 6;
+    }
+
+    .memory-third {
+      grid-column: span 4;
+    }
+
+    .memory-wide img {
+      aspect-ratio: 16 / 10;
+    }
+
+    .memory-tall img {
+      aspect-ratio: 4 / 5;
+    }
+
+    .memory-half img {
+      aspect-ratio: 4 / 3;
+    }
+
+    .memory-third img {
+      aspect-ratio: 3 / 4;
+    }
+
+    .marine-strip {
+      display: grid;
+      width: min(1450px, 100%);
+      margin: 0 auto;
+      grid-template-columns: 1fr 0.8fr 1fr;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .marine-strip figure {
+      margin: 0;
+    }
+
+    .marine-strip img {
+      width: 100%;
+      object-fit: cover;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .marine-one img {
+      aspect-ratio: 4 / 3;
+    }
+
+    .marine-two img {
+      aspect-ratio: 3 / 4;
+    }
+
+    .marine-three img {
+      aspect-ratio: 4 / 3;
+    }
+
+    .strip-caption {
+      width: min(820px, 90%);
+      margin: 60px auto 0;
+      text-align: center;
+    }
+
+    .strip-caption blockquote {
+      margin-bottom: 16px;
+      color: var(--warm-white);
+      font-size: clamp(2rem, 4vw, 4rem);
+      font-style: italic;
+      line-height: 1.05;
+    }
+
+    .strip-caption p {
+      margin-bottom: 0;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .ball-grid {
+      display: grid;
+      width: min(1250px, 100%);
+      margin: 0 auto;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .ball-card {
+      margin: 0;
+    }
+
+    .ball-card img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .ball-card figcaption {
+      margin-top: 16px;
+    }
+
+    .family-photo-grid {
+      display: grid;
+      width: min(1450px, 100%);
+      margin: 0 auto;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 22px;
+    }
+
+    .family-photo-grid figure {
+      margin: 0;
+    }
+
+    .family-photo-grid img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .family-feature {
+      grid-row: span 2;
+    }
+
+    .family-feature img {
+      min-height: 720px;
+    }
+
+    .family-side img {
+      min-height: 345px;
+    }
+
+    .farm-gallery {
+      display: grid;
+      width: min(1450px, 100%);
+      margin: 0 auto;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 22px;
+    }
+
+    .farm-gallery figure {
+      margin: 0;
+    }
+
+    .farm-gallery img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .farm-dusk {
+      grid-row: span 2;
+    }
+
+    .farm-dusk img {
+      min-height: 760px;
+    }
+
+    .farm-small img {
+      min-height: 365px;
+    }
+
+    .frame-closing {
+      padding: 150px 8vw;
+      text-align: center;
+    }
+
+    .frame-closing-inner {
+      width: min(900px, 100%);
+      margin: 0 auto;
+    }
+
+    .frame-closing blockquote {
+      margin-bottom: 30px;
+      color: var(--warm-white);
+      font-size: clamp(3rem, 6vw, 6.5rem);
+      font-style: italic;
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+    }
+
+    @media (max-width: 900px) {
+      .chapter-heading {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .chapter-heading-copy {
+        justify-self: start;
+      }
+
+      .memory-wide,
+      .memory-tall,
+      .memory-half,
+      .memory-third {
+        grid-column: span 6;
+      }
+
+      .marine-strip {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .marine-one {
+        grid-column: 1 / -1;
+      }
+
+      .marine-one img {
+        aspect-ratio: 16 / 9;
+      }
+
+      .family-photo-grid,
+      .farm-gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .family-feature,
+      .farm-dusk {
+        grid-row: auto;
+      }
+
+      .family-feature img,
+      .family-side img,
+      .farm-dusk img,
+      .farm-small img {
+        min-height: 0;
+        height: auto;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .frame-hero {
+        min-height: 76vh;
+      }
+
+      .frame-hero-image {
+        background-position: center center;
+      }
+
+      .frame-hero-content {
+        padding-bottom: 55px;
+      }
+
+      .frame-hero h1 {
+        font-size: clamp(4.4rem, 22vw, 7rem);
+      }
+
+      .photo-chapter,
+      .frame-closing {
+        padding: 95px 22px;
+      }
+
+      .memory-grid,
+      .marine-strip,
+      .ball-grid {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .memory-card img,
+      .memory-wide img,
+      .memory-tall img,
+      .memory-half img,
+      .memory-third img {
+        height: auto;
+        aspect-ratio: auto;
+      }
+
+      .ball-card img {
+        height: auto;
+        aspect-ratio: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =====================================================
+       NAVIGATION
+  ====================================================== -->
+  <header class="site-header" id="siteHeader">
+    <a class="site-logo" href="index.html" aria-label="The Next Verse home">
+      <span class="logo-mark">◉</span>
+      <span class="logo-text">THE NEXT VERSE</span>
+    </a>
+
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="mainNav"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="story.html">My Story</a>
+      <a href="frame.html" class="active">In the Frame</a>
+      <a href="carry.html">The Things I Carry</a>
+    </nav>
+  </header>
+
+
+  <main>
+
+    <!-- =====================================================
+         PAGE HERO
+    ====================================================== -->
+    <section class="frame-hero">
+      <div class="frame-hero-image" aria-hidden="true"></div>
+      <div class="frame-hero-overlay" aria-hidden="true"></div>
+
+      <div class="frame-hero-content">
+        <p class="eyebrow">A life in photographs</p>
+
+        <h1>
+          In the
+          <span>Frame</span>
+        </h1>
+
+        <p class="frame-hero-intro">
+          Some memories become stories. Others live in a photograph,
+          holding pieces of who I was, who I loved, and where I came from.
+        </p>
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         CHAPTER 1: ROOTS
+    ====================================================== -->
+    <section class="photo-chapter section-evergreen">
+
+      <div class="chapter-heading reveal">
+        <div>
+          <p class="eyebrow">01 · Roots</p>
+          <h2>Where I<br>began.</h2>
+        </div>
+
+        <div class="chapter-heading-copy">
+          <p>
+            I grew up in a rural farming community in North Central
+            Washington, tucked into the mountains with my mom, stepdad,
+            sister, and brother.
+          </p>
+
+          <p>
+            Before the military, before injury changed the shape of my life,
+            I was an athlete, a sister, and a kid from Waterville.
+          </p>
+        </div>
+      </div>
+
+      <div class="memory-grid">
+
+        <figure class="memory-card memory-wide reveal">
+          <img
+            src="images/Photo-3-letterman-jacket.jpg"
+            alt="Jess, Julia, and Lakin wearing Waterville Shockers letterman jackets"
+            loading="lazy"
+          >
+          <figcaption>
+            <span class="memory-title">The three of us</span>
+            <span class="memory-caption">
+              Me, my sister Julia, and my brother Lakin · Waterville Shockers
+            </span>
+          </figcaption>
+        </figure>
+
+        <figure class="memory-card memory-tall reveal">
+          <img
+            src="images/Photo-1-Basketball.jpg"
+            alt="Jess smiling in her high school basketball jersey"
+            loading="lazy"
+          >
+          <figcaption>
+            <span class="memory-title">Before I was a Marine</span>
+            <span class="memory-caption">
+              Junior year · 2011–2012 · Basketball was one of four sports I called mine
+            </span>
+          </figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         CHAPTER 2: MARINES / FRIENDSHIP
+    ====================================================== -->
+    <section class="photo-chapter section-blue">
+
+      <div class="chapter-heading reveal">
+        <div>
+          <p class="eyebrow">02 · Belonging</p>
+          <h2>The people<br>who knew me then.</h2>
+        </div>
+
+        <div class="chapter-heading-copy">
+          <p>
+            I joined the Marine Corps at 17. I became a Motor Transport
+            Operator, moved around the country, and found a kind of
+            community that is difficult to put into words.
+          </p>
+
+          <p>
+            These were not just people I worked beside. They became part
+            of the life I built and part of what made leaving so difficult.
+          </p>
+        </div>
+      </div>
+
+      <div class="marine-strip">
+
+        <figure class="marine-one reveal">
+          <img
+            src="images/Photo-2-Marine-3.jpg"
+            alt="Jess and Dale together during their Marine Corps service"
+            loading="lazy"
+          >
+        </figure>
+
+        <figure class="marine-two reveal">
+          <img
+            src="images/Photo-2-Marine-2.jpg"
+            alt="Jess and Dale taking a close selfie in camouflage uniforms"
+            loading="lazy"
+          >
+        </figure>
+
+        <figure class="marine-three reveal">
+          <img
+            src="images/Photo-2-Marine-1.jpg"
+            alt="Jess and Dale toasting beers together"
+            loading="lazy"
+          >
+        </figure>
+
+      </div>
+
+      <div class="strip-caption reveal">
+        <blockquote>
+          “Many veterans talk about the loss of community,
+          but it isn’t something I feel can be articulated in words.”
+        </blockquote>
+
+        <p>With my best friend and battle buddy, Dale Miranda</p>
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         CHAPTER 3: DRESS BLUES
+    ====================================================== -->
+    <section class="photo-chapter section-dark">
+
+      <div class="chapter-heading reveal">
+        <div>
+          <p class="eyebrow">03 · The Marine I was</p>
+          <h2>More than<br>the uniform.</h2>
+        </div>
+
+        <div class="chapter-heading-copy">
+          <p>
+            The Marine Corps shaped me into the person I am, but even then
+            I was never only one thing. I was a friend, a daughter, an athlete,
+            and someone still figuring out where life would take me.
+          </p>
+        </div>
+      </div>
+
+      <div class="ball-grid">
+
+        <figure class="ball-card reveal">
+          <img
+            src="images/Photo-2-Marine-4.jpg"
+            alt="Jess and her friend Sylvia Cooper in Dress Blues at the 2015 Marine Corps Ball"
+            loading="lazy"
+          >
+          <figcaption>
+            <span class="memory-title">Friendship in Dress Blues</span>
+            <span class="memory-caption">
+              With one of my best friends and fellow Marine, Sylvia Cooper · 2015 Marine Corps Ball
+            </span>
+          </figcaption>
+        </figure>
+
+        <figure class="ball-card reveal">
+          <img
+            src="images/Photo-2-Marine-5.jpg"
+            alt="Jess with her dad Dan Day at the 2015 Marine Corps Ball"
+            loading="lazy"
+          >
+          <figcaption>
+            <span class="memory-title">My dad and me</span>
+            <span class="memory-caption">
+              With my dad, Dan Day · 2015 Marine Corps Ball
+            </span>
+          </figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         CHAPTER 4: LOVE / FAMILY
+    ====================================================== -->
+    <section class="photo-chapter section-fog">
+
+      <div class="chapter-heading reveal">
+        <div>
+          <p class="eyebrow">04 · What came next</p>
+          <h2>A life<br>I never planned.</h2>
+        </div>
+
+        <div class="chapter-heading-copy">
+          <p>
+            The military led me to my husband, my best friend in the universe.
+            We met while we were both active duty Marines, and the life that
+            followed gave me a family bigger than I could have imagined.
+          </p>
+
+          <p>
+            I have two boys of my own and two older bonus kids.
+            Four children in total, and so much of who I am now is wrapped
+            up in loving them.
+          </p>
+        </div>
+      </div>
+
+      <div class="memory-grid">
+
+        <figure class="memory-card memory-half reveal">
+          <img
+            src="images/Photo-4-family-2.jpg"
+            alt="Jess and Elijah smiling together in the hospital before Domingo was born"
+            loading="lazy"
+          >
+          <figcaption>
+            <span class="memory-title">Right before everything changed again</span>
+            <span class="memory-caption">
+              Elijah and me · Waiting to meet Domingo
+            </span>
+          </figcaption>
+        </figure>
+
+        <figure class="memory-card memory-half reveal">
+          <img
+            src="images/Photo-4-family-1.jpg"
+            alt="Jess with Elijah and her extended family at Christmas"
+            loading="lazy"
+          >
+          <figcaption>
+            <span class="memory-title">The family around me</span>
+            <span class="memory-caption">
+              Home, holidays, and the people who make up my world
+            </span>
+          </figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         CHAPTER 5: FAMILY SNAPSHOTS
+    ====================================================== -->
+    <section class="photo-chapter section-evergreen">
+
+      <div class="chapter-heading reveal">
+        <div>
+          <p class="eyebrow">05 · Motherhood</p>
+          <h2>The center<br>of everything.</h2>
+        </div>
+
+        <div class="chapter-heading-copy">
+          <p>
+            As a mom, I find I often only talk about my kids.
+            Maybe that is because so much of my life is measured in the
+            ordinary moments that become memories before I realize it.
+          </p>
+        </div>
+      </div>
+
+      <div class="family-photo-grid">
+
+        <figure class="family-feature reveal">
+          <img
+            src="images/Photo-4-family-1.jpg"
+            alt="Jess with her husband and extended family together at Christmas"
+            loading="lazy"
+          >
+        </figure>
+
+        <figure class="family-side reveal">
+          <img
+            src="images/Photo-4-family-3.jpg"
+            alt="Elijah with Michael, Adrian, Ryann, and Domingo on the Fourth of July in 2021"
+            loading="lazy"
+          >
+        </figure>
+
+        <figure class="family-side reveal">
+          <img
+            src="images/Photo-4-family-4.jpg"
+            alt="Elijah with the children at Christmas in 2022"
+            loading="lazy"
+          >
+        </figure>
+
+      </div>
+
+      <div class="strip-caption reveal">
+        <blockquote>
+          “I am the mother who now pours everything she has
+          into her children.”
+        </blockquote>
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         CHAPTER 6: HOME
+    ====================================================== -->
+    <section class="photo-chapter section-dark">
+
+      <div class="chapter-heading reveal">
+        <div>
+          <p class="eyebrow">06 · Home</p>
+          <h2>The place<br>beneath it all.</h2>
+        </div>
+
+        <div class="chapter-heading-copy">
+          <p>
+            No matter how far I moved, this is part of where my story began.
+            A little farm tucked into the mountains of North Central Washington.
+          </p>
+
+          <p>
+            The farmhouse, the outbuildings, the windmill, the horizon.
+            The kind of place that stays with you long after you leave it.
+          </p>
+        </div>
+      </div>
+
+      <div class="farm-gallery">
+
+        <figure class="farm-dusk reveal">
+          <img
+            src="images/Photo-5-Farm-3.jpg"
+            alt="A tractor silhouetted against the horizon beneath a crescent moon"
+            loading="lazy"
+          >
+        </figure>
+
+        <figure class="farm-small reveal">
+          <img
+            src="images/Photo-5-Farm-1.jpg"
+            alt="Outbuildings, a windmill, trees, and part of the barn on the farm where Jess grew up"
+            loading="lazy"
+          >
+        </figure>
+
+        <figure class="farm-small reveal">
+          <img
+            src="images/Photo-5-Farm-2.jpg"
+            alt="The farmhouse where Jess grew up in North Central Washington"
+            loading="lazy"
+          >
+        </figure>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         CLOSING
+    ====================================================== -->
+    <section class="frame-closing section-blue">
+      <div class="frame-closing-inner reveal">
+
+        <p class="eyebrow">Still becoming</p>
+
+        <blockquote>
+          I can look back without believing my best chapters are behind me.
+        </blockquote>
+
+        <p>
+          These photographs hold pieces of who I have been, but none of them
+          tell the whole story. My life is still changing. So am I.
+        </p>
+
+        <a href="carry.html" class="button-outline">
+          The Things I Carry
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+  <footer class="site-footer">
+
+    <div class="footer-title">
+      <span>THE NEXT VERSE</span>
+      <small>A visual autobiography of Jess Day</small>
+    </div>
+
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="index.html">Home</a>
+      <a href="story.html">My Story</a>
+      <a href="frame.html">In the Frame</a>
+      <a href="carry.html">The Things I Carry</a>
+    </nav>
+
+    <p class="footer-note">
+      As I was. As I am. Whatever comes next.
+    </p>
+
+  </footer>
+
+  <script src="js/script.js"></script>
+
+</body>
+</html>
