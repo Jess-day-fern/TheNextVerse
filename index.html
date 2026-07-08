@@ -26,6 +26,90 @@
 
   <!-- Main stylesheet -->
   <link rel="stylesheet" href="css/style.css">
+
+  <!--
+    Music button styles.
+    These are included directly in index.html so the updated
+    music control works without requiring a CSS file change.
+  -->
+  <style>
+    .music-player-wrap {
+      margin-top: 26px;
+    }
+
+    .music-player {
+      width: 100%;
+      overflow: hidden;
+      border: 1px solid rgba(242, 239, 231, 0.18);
+      background: rgba(10, 15, 19, 0.82);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.32);
+    }
+
+    .music-player iframe {
+      display: block;
+      width: 100%;
+      height: 200px;
+      border: 0;
+    }
+
+    .music-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      margin-top: 22px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--warm-white, #f2efe7);
+      font-family: inherit;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .music-button .play-icon {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border: 1px solid var(--amber, #c49a63);
+      border-radius: 50%;
+      color: var(--amber, #c49a63);
+      font-size: 0.6rem;
+      transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease;
+    }
+
+    .music-button:hover .play-icon {
+      background: var(--amber, #c49a63);
+      color: var(--ink, #0a0f13);
+      transform: scale(1.06);
+    }
+
+    .music-button[aria-expanded="true"] .play-icon {
+      background: var(--amber, #c49a63);
+      color: var(--ink, #0a0f13);
+    }
+
+    .music-player-status {
+      margin: 12px 0 0;
+      color: rgba(242, 239, 231, 0.48);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      line-height: 1.5;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 780px) {
+      .music-player iframe {
+        height: 190px;
+      }
+    }
+  </style>
 </head>
 
 
@@ -596,7 +680,9 @@
 
     <!-- =====================================================
          MUSIC
-         Exact YouTube video supplied by user
+         UPDATED:
+         Button now reveals an embedded YouTube player
+         directly on this page.
     ====================================================== -->
 
     <section class="music section-vinyl">
@@ -674,12 +760,19 @@
         </div>
 
 
-        <a
-          href="https://www.youtube.com/watch?v=a0JHHSYs9io&list=RDa0JHHSYs9io&start_radio=1"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="listen-button"
-          aria-label="Listen to Staying Still by Noah Kahan on YouTube"
+        <!--
+          MUSIC BUTTON
+
+          The player is initially hidden.
+          Clicking this button reveals the embedded player
+          and begins playback inside the page.
+        -->
+        <button
+          type="button"
+          class="music-button"
+          id="musicToggle"
+          aria-expanded="false"
+          aria-controls="musicPlayerWrap"
         >
 
           <span
@@ -689,9 +782,53 @@
             ▶
           </span>
 
-          Listen
+          <span id="musicButtonText">
+            Play on page
+          </span>
 
-        </a>
+        </button>
+
+
+        <!--
+          EMBEDDED PLAYER
+
+          data-src prevents YouTube from loading until
+          the visitor actually clicks the music button.
+
+          autoplay=1 is triggered after that click.
+          This works more reliably because playback follows
+          a direct user interaction.
+        -->
+        <div
+          class="music-player-wrap"
+          id="musicPlayerWrap"
+          hidden
+        >
+
+          <div class="music-player">
+
+            <iframe
+              id="musicFrame"
+              width="100%"
+              height="200"
+              src="about:blank"
+              data-src="https://www.youtube.com/embed/a0JHHSYs9io?autoplay=1&rel=0"
+              title="Staying Still by Noah Kahan"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            >
+            </iframe>
+
+          </div>
+
+          <p class="music-player-status">
+            Playing through YouTube on this page
+          </p>
+
+        </div>
+
 
       </aside>
 
@@ -914,8 +1051,101 @@
 
 
 
-  <!-- Main JavaScript -->
+  <!-- Existing main JavaScript -->
   <script src="js/script.js"></script>
+
+
+  <!--
+    Music button JavaScript.
+    Included directly here so you do not need to update script.js.
+  -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+      const musicToggle =
+        document.getElementById("musicToggle");
+
+      const musicPlayerWrap =
+        document.getElementById("musicPlayerWrap");
+
+      const musicFrame =
+        document.getElementById("musicFrame");
+
+      const musicButtonText =
+        document.getElementById("musicButtonText");
+
+
+      if (
+        musicToggle &&
+        musicPlayerWrap &&
+        musicFrame &&
+        musicButtonText
+      ) {
+
+        musicToggle.addEventListener("click", function () {
+
+          const isOpen =
+            musicToggle.getAttribute("aria-expanded") === "true";
+
+
+          /*
+            OPEN PLAYER
+          */
+          if (!isOpen) {
+
+            musicPlayerWrap.hidden = false;
+
+            musicToggle.setAttribute(
+              "aria-expanded",
+              "true"
+            );
+
+            musicButtonText.textContent =
+              "Hide player";
+
+
+            /*
+              Load YouTube only on first click.
+              Because the iframe loads after a user action,
+              autoplay has a better chance of working.
+            */
+            if (
+              musicFrame.getAttribute("src") === "about:blank"
+            ) {
+
+              musicFrame.setAttribute(
+                "src",
+                musicFrame.dataset.src
+              );
+
+            }
+
+          }
+
+
+          /*
+            HIDE PLAYER
+          */
+          else {
+
+            musicPlayerWrap.hidden = true;
+
+            musicToggle.setAttribute(
+              "aria-expanded",
+              "false"
+            );
+
+            musicButtonText.textContent =
+              "Show player";
+
+          }
+
+        });
+
+      }
+
+    });
+  </script>
 
 </body>
 </html>
